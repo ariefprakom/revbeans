@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Beans Review Sheet</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f3ee;
+      color: #2f2a25;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 40px auto;
+    }
+
+    .header {
+      background: #3b2b23;
+      color: white;
+      padding: 32px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.85;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #5b3b2c;
+      border-bottom: 2px solid #eee6de;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: #6b4a3a;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label.title {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d8d0c9;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid #d8d0c9;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #faf8f5;
+      transition: 0.2s ease;
+      font-size: 14px;
+    }
+
+    .option input:checked + label {
+      background: #5b3b2c;
+      color: white;
+      border-color: #5b3b2c;
+    }
+
+    .stage {
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .stage:last-child {
+      border-bottom: none;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #5b3b2c;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e9e2db;
+      color: #2f2a25;
+    }
+
+    .btn-danger {
+      background: #c94b4b;
+      color: white;
+    }
+
+    .result {
+      white-space: pre-wrap;
+      background: #f8f5f1;
+      border-left: 4px solid #5b3b2c;
+      padding: 18px;
+      border-radius: 8px;
+      min-height: 120px;
+    }
+
+    .rating label {
+      font-size: 20px;
+      padding: 6px 12px;
+    }
+
+    .footer {
+      text-align: center;
+      opacity: 0.65;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: 94%;
+        margin-top: 20px;
+      }
+
+      .header,
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>☕ Coffee Beans Review Sheet</h1>
+    <p>Structured sensory review for manual brew & Japanese iced coffee.</p>
+  </div>
+
+  <!-- BEAN INFORMATION -->
+
+  <div class="card">
+    <h2>Bean Information</h2>
+
+    <div class="grid">
+      <div class="form-group">
+        <label class="title">Beans / Origin</label>
+        <input id="beans" type="text"
+               value="Ijen Bondowoso">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Process</label>
+        <input id="process" type="text"
+               value="Natural Anaerobic">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Varietas</label>
+        <input id="variety" type="text"
+               placeholder="Contoh: Bourbon">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Roaster</label>
+        <input id="roaster" type="text"
+               placeholder="Nama roastery">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Roast Date</label>
+        <input id="roastDate" type="date">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Brew Date</label>
+        <input id="brewDate" type="date">
+      </div>
+    </div>
+  </div>
+
+  <!-- BREW PARAMETERS -->
+
+  <div class="card">
+    <h2>Brewing Parameters</h2>
+
+    <div class="grid">
+
+      <div class="form-group">
+        <label class="title">Coffee (g)</label>
+        <input id="coffee" type="number"
+               value="15">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Hot Water (g)</label>
+        <input id="water" type="number"
+               value="150">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Ice (g)</label>
+        <input id="ice" type="number"
+               value="75">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Temperature (°C)</label>
+        <input id="temperature" type="number"
+               value="91">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Grinder / Setting</label>
+        <input id="grinder" type="text"
+               placeholder="Contoh: Timemore C3 / 15 clicks">
+      </div>
+
+      <div class="form-group">
+        <label class="title">Drawdown</label>
+        <input id="drawdown" type="text"
+               placeholder="Contoh: 2:25">
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label class="title">Pouring Recipe</label>
+      <textarea id="recipe"
+        placeholder="Contoh:
+0:00 - 30g bloom
+0:40 - 90g
+1:10 - 150g"></textarea>
+    </div>
+  </div>
+
+
+  <!-- WHOLE BEAN -->
+
+  <div class="card">
+    <h2>1. Whole Bean</h2>
+
+    <div class="stage">
+
+      <h3>Intensitas aroma</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="wholeIntensity"
+                 value="sangat ringan"
+                 id="wi1">
+          <label for="wi1">Sangat ringan</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="wholeIntensity"
+                 value="ringan"
+                 id="wi2">
+          <label for="wi2">Ringan</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="wholeIntensity"
+                 value="sedang"
+                 id="wi3">
+          <label for="wi3">Sedang</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="wholeIntensity"
+                 value="kuat"
+                 id="wi4">
+          <label for="wi4">Kuat</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="wholeIntensity"
+                 value="sangat kuat"
+                 id="wi5">
+          <label for="wi5">Sangat kuat</label>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Karakter aroma</h3>
+
+      <div class="options multi">
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="fruity">
+          <label>Fruity</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="floral">
+          <label>Floral</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="sweet">
+          <label>Sweet</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="winey">
+          <label>Winey</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="fermented">
+          <label>Fermented</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="chocolate">
+          <label>Chocolate</label>
+        </label>
+
+        <label class="option">
+          <input type="checkbox"
+                 name="wholeAroma"
+                 value="spicy">
+          <label>Spicy</label>
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- GROUND -->
+
+  <div class="card">
+
+    <h2>2. Ground Coffee</h2>
+
+    <div class="stage">
+
+      <h3>Perubahan aroma setelah grinding</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="groundIntensity"
+                 value="menurun"
+                 id="gi1">
+          <label for="gi1">Menurun</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="groundIntensity"
+                 value="relatif sama"
+                 id="gi2">
+          <label for="gi2">Relatif sama</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="groundIntensity"
+                 value="lebih kuat"
+                 id="gi3">
+          <label for="gi3">Lebih kuat</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="groundIntensity"
+                 value="jauh lebih kuat"
+                 id="gi4">
+          <label for="gi4">Jauh lebih kuat</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Aroma / flavor family</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="citrus"
+                 id="ga1">
+          <label for="ga1">Citrus</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="tropical fruit"
+                 id="ga2">
+          <label for="ga2">Tropical Fruit</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="red fruit"
+                 id="ga3">
+          <label for="ga3">Red Fruit</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="dark fruit"
+                 id="ga4">
+          <label for="ga4">Dark Fruit</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="floral"
+                 id="ga5">
+          <label for="ga5">Floral</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="winey"
+                 id="ga6">
+          <label for="ga6">Winey</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="groundAroma"
+                 value="chocolate"
+                 id="ga7">
+          <label for="ga7">Chocolate</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label class="title">Aroma spesifik yang teringat</label>
+
+      <input id="specificAroma"
+             type="text"
+             placeholder="Contoh: grape, strawberry, orange, peach...">
+    </div>
+
+  </div>
+
+
+  <!-- BLOOM -->
+
+  <div class="card">
+
+    <h2>3. Bloom & Brewing Aroma</h2>
+
+    <div class="stage">
+
+      <h3>Karakter aroma saat brewing</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="fruity"
+                 id="ba1">
+          <label for="ba1">Fruity</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="floral"
+                 id="ba2">
+          <label for="ba2">Floral</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="sweet"
+                 id="ba3">
+          <label for="ba3">Sweet</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="winey"
+                 id="ba4">
+          <label for="ba4">Winey</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="fermented"
+                 id="ba5">
+          <label for="ba5">Fermented</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox"
+                 name="bloomAroma"
+                 value="boozy"
+                 id="ba6">
+          <label for="ba6">Boozy</label>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CUP -->
+
+  <div class="card">
+
+    <h2>4. First Sip</h2>
+
+    <div class="stage">
+
+      <h3>Sweetness</h3>
+
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="sweetness"
+                 value="rendah" id="sw1">
+          <label for="sw1">Rendah</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="sweetness"
+                 value="sedang" id="sw2">
+          <label for="sw2">Sedang</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="sweetness"
+                 value="tinggi" id="sw3">
+          <label for="sw3">Tinggi</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="sweetness"
+                 value="sangat tinggi" id="sw4">
+          <label for="sw4">Sangat tinggi</label>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Acidity</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio" name="acidity"
+                 value="rendah" id="ac1">
+          <label for="ac1">Rendah</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="acidity"
+                 value="sedang" id="ac2">
+          <label for="ac2">Sedang</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="acidity"
+                 value="tinggi" id="ac3">
+          <label for="ac3">Tinggi</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Body</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio" name="body"
+                 value="tea-like" id="bo1">
+          <label for="bo1">Tea-like</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="body"
+                 value="light" id="bo2">
+          <label for="bo2">Light</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="body"
+                 value="medium" id="bo3">
+          <label for="bo3">Medium</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="body"
+                 value="syrupy" id="bo4">
+          <label for="bo4">Syrupy</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="body"
+                 value="heavy" id="bo5">
+          <label for="bo5">Heavy</label>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TEMPERATURE -->
+
+  <div class="card">
+
+    <h2>5. Saat Suhu Mulai Naik</h2>
+
+    <div class="stage">
+
+      <h3>Perubahan flavor</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="flavorChange"
+                 value="makin samar"
+                 id="fc1">
+          <label for="fc1">Makin samar</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="flavorChange"
+                 value="relatif tetap"
+                 id="fc2">
+          <label for="fc2">Relatif tetap</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="flavorChange"
+                 value="makin jelas"
+                 id="fc3">
+          <label for="fc3">Makin jelas</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="flavorChange"
+                 value="berubah karakter"
+                 id="fc4">
+          <label for="fc4">Berubah karakter</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Clarity</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio" name="clarity"
+                 value="muddy" id="cl1">
+          <label for="cl1">Muddy</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="clarity"
+                 value="cukup jelas" id="cl2">
+          <label for="cl2">Cukup jelas</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="clarity"
+                 value="clean" id="cl3">
+          <label for="cl3">Clean</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="clarity"
+                 value="sangat clean" id="cl4">
+          <label for="cl4">Sangat clean</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <h3>Karakter fermentasi</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio" name="fermentation"
+                 value="tidak terasa" id="fr1">
+          <label for="fr1">Tidak terasa</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="fermentation"
+                 value="subtle" id="fr2">
+          <label for="fr2">Subtle</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="fermentation"
+                 value="balanced" id="fr3">
+          <label for="fr3">Balanced</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="fermentation"
+                 value="dominan" id="fr4">
+          <label for="fr4">Dominan</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="fermentation"
+                 value="terlalu dominan" id="fr5">
+          <label for="fr5">Terlalu dominan</label>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- AFTERTASTE -->
+
+  <div class="card">
+
+    <h2>6. Aftertaste</h2>
+
+    <div class="stage">
+
+      <h3>Durasi</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="aftertaste"
+                 value="pendek"
+                 id="at1">
+          <label for="at1">Pendek</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="aftertaste"
+                 value="sedang"
+                 id="at2">
+          <label for="at2">Sedang</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="aftertaste"
+                 value="panjang"
+                 id="at3">
+          <label for="at3">Panjang</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="aftertaste"
+                 value="sangat panjang"
+                 id="at4">
+          <label for="at4">Sangat panjang</label>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- OVERALL -->
+
+  <div class="card">
+
+    <h2>7. Overall Impression</h2>
+
+    <div class="stage">
+
+      <h3>Kecocokan untuk Japanese Iced</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="japanese"
+                 value="kurang cocok"
+                 id="jp1">
+          <label for="jp1">Kurang cocok</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="japanese"
+                 value="cukup cocok"
+                 id="jp2">
+          <label for="jp2">Cukup cocok</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="japanese"
+                 value="cocok"
+                 id="jp3">
+          <label for="jp3">Cocok</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="japanese"
+                 value="sangat cocok"
+                 id="jp4">
+          <label for="jp4">Sangat cocok</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="stage rating">
+
+      <h3>Personal Enjoyment</h3>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio"
+                 name="rating"
+                 value="1"
+                 id="rt1">
+          <label for="rt1">★</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="rating"
+                 value="2"
+                 id="rt2">
+          <label for="rt2">★★</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="rating"
+                 value="3"
+                 id="rt3">
+          <label for="rt3">★★★</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="rating"
+                 value="4"
+                 id="rt4">
+          <label for="rt4">★★★★</label>
+        </div>
+
+        <div class="option">
+          <input type="radio"
+                 name="rating"
+                 value="5"
+                 id="rt5">
+          <label for="rt5">★★★★★</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label class="title">Catatan tambahan</label>
+
+      <textarea id="notes"
+        placeholder="Tuliskan hal unik yang Anda rasakan..."></textarea>
+    </div>
+
+  </div>
+
+
+  <!-- RESULT -->
+
+  <div class="card">
+
+    <h2>Review Result</h2>
+
+    <div id="result" class="result">
+      Isi review di atas lalu tekan "Generate Review".
+    </div>
+
+    <div class="button-group">
+
+      <button class="btn-primary"
+              onclick="generateReview()">
+        Generate Review
+      </button>
+
+      <button class="btn-secondary"
+              onclick="copyReview()">
+        Copy Review
+      </button>
+
+      <button class="btn-secondary"
+              onclick="saveData()">
+        Save
+      </button>
+
+      <button class="btn-secondary"
+              onclick="loadData()">
+        Load
+      </button>
+
+      <button class="btn-danger"
+              onclick="resetForm()">
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    Coffee Sensory Review Sheet — Japanese Iced Manual Brew
+  </div>
+
+</div>
+
+
+<script>
+
+function radioValue(name) {
+  const el = document.querySelector(
+    `input[name="${name}"]:checked`
+  );
+
+  return el ? el.value : "-";
+}
+
+
+function checkboxValues(name) {
+
+  const items = [
+    ...document.querySelectorAll(
+      `input[name="${name}"]:checked`
+    )
+  ];
+
+  if (!items.length) {
+    return "-";
+  }
+
+  return items.map(x => x.value).join(", ");
+}
+
+
+function value(id) {
+  return document.getElementById(id).value || "-";
+}
+
+
+function generateReview() {
+
+  const beans = value("beans");
+  const process = value("process");
+  const variety = value("variety");
+
+  const wholeIntensity = radioValue("wholeIntensity");
+  const wholeAroma = checkboxValues("wholeAroma");
+
+  const groundIntensity = radioValue("groundIntensity");
+  const groundAroma = checkboxValues("groundAroma");
+  const specificAroma = value("specificAroma");
+
+  const bloomAroma = checkboxValues("bloomAroma");
+
+  const sweetness = radioValue("sweetness");
+  const acidity = radioValue("acidity");
+  const body = radioValue("body");
+
+  const flavorChange = radioValue("flavorChange");
+  const clarity = radioValue("clarity");
+  const fermentation = radioValue("fermentation");
+
+  const aftertaste = radioValue("aftertaste");
+  const japanese = radioValue("japanese");
+  const rating = radioValue("rating");
+
+  const coffee = value("coffee");
+  const water = value("water");
+  const ice = value("ice");
+  const temp = value("temperature");
+  const drawdown = value("drawdown");
+
+  const notes = value("notes");
+
+
+  const review = `
+COFFEE REVIEW
+
+Beans:
+${beans}
+
+Process:
+${process}
+
+Variety:
+${variety}
+
+
+BREW
+
+Japanese Iced
+
+Coffee: ${coffee} g
+Hot Water: ${water} g
+Ice: ${ice} g
+Temperature: ${temp} °C
+Drawdown: ${drawdown}
+
+
+AROMA
+
+Saat membuka kemasan, intensitas aroma terasa ${wholeIntensity}, dengan karakter utama ${wholeAroma}.
+
+Setelah digiling, aromanya terasa ${groundIntensity}. Karakter yang muncul antara lain ${groundAroma}.
+
+Aroma spesifik yang teringat:
+${specificAroma}
+
+Saat bloom dan proses brewing, aroma yang muncul adalah ${bloomAroma}.
+
+
+IN THE CUP
+
+Sweetness: ${sweetness}
+Acidity: ${acidity}
+Body: ${body}
+
+Saat suhu kopi mulai naik, karakter flavor terasa ${flavorChange} dengan clarity ${clarity}.
+
+Karakter fermentasi anaerobic terasa ${fermentation}.
+
+
+AFTERTASTE
+
+Aftertaste: ${aftertaste}
+
+
+OVERALL
+
+Untuk disajikan sebagai Japanese iced, beans ini menurut saya ${japanese}.
+
+Personal enjoyment:
+${rating}/5
+
+Catatan:
+${notes}
+`.trim();
+
+
+  document.getElementById("result").textContent = review;
+
+}
+
+
+function copyReview() {
+
+  const text =
+    document.getElementById("result").textContent;
+
+  navigator.clipboard.writeText(text);
+
+  alert("Review berhasil disalin.");
+}
+
+
+function saveData() {
+
+  const data = {};
+
+  document.querySelectorAll(
+    "input, textarea"
+  ).forEach(el => {
+
+    if (
+      el.type === "radio" ||
+      el.type === "checkbox"
+    ) {
+
+      data[el.id || el.name + el.value] =
+        el.checked;
+
+    } else {
+
+      data[el.id] = el.value;
+
+    }
+
+  });
+
+  localStorage.setItem(
+    "coffeeReview",
+    JSON.stringify(data)
+  );
+
+  alert("Review tersimpan di browser.");
+}
+
+
+function loadData() {
+
+  const saved =
+    localStorage.getItem("coffeeReview");
+
+  if (!saved) {
+    alert("Belum ada review tersimpan.");
+    return;
+  }
+
+  const data = JSON.parse(saved);
+
+  document.querySelectorAll(
+    "input, textarea"
+  ).forEach(el => {
+
+    const key =
+      el.id || el.name + el.value;
+
+    if (data[key] === undefined) return;
+
+    if (
+      el.type === "radio" ||
+      el.type === "checkbox"
+    ) {
+
+      el.checked = data[key];
+
+    } else {
+
+      el.value = data[key];
+
+    }
+
+  });
+
+  generateReview();
+}
+
+
+function resetForm() {
+
+  if (!confirm(
+    "Hapus seluruh isian review?"
+  )) return;
+
+  localStorage.removeItem("coffeeReview");
+
+  location.reload();
+}
+
+
+// Set today's date automatically
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const today =
+      new Date()
+      .toISOString()
+      .split("T")[0];
+
+    document.getElementById(
+      "brewDate"
+    ).value = today;
+
+  }
+);
+
+</script>
+
+</body>
+</html>
